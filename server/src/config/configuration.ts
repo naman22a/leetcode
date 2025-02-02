@@ -8,6 +8,8 @@ const configuration = () => ({
     db_url: process.env.DATABASE_URL,
     redis_url: process.env.REDIS_URL,
     secret: process.env.SESSION_SECRET,
+    github_client_id: process.env.GITHUB_CLIENT_ID,
+    github_client_secret: process.env.GITHUB_CLIENT_SECRET,
 });
 
 export type Configuration = ConfigType<typeof configuration>;

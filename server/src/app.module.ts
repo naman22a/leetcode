@@ -5,6 +5,7 @@ import { MikroOrmModule } from '@mikro-orm/nestjs';
 
 // Modules
 import { UsersModule } from './shared';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
     imports: [
@@ -19,6 +20,8 @@ import { UsersModule } from './shared';
 
         // Modules
         UsersModule,
+
+        AuthModule,
     ],
     controllers: [],
     providers: [],
