@@ -2,6 +2,7 @@ import { InjectRepository } from '@mikro-orm/nestjs';
 import { Injectable } from '@nestjs/common';
 import { User } from './user.model';
 import { EntityManager, EntityRepository } from '@mikro-orm/postgresql';
+import { CreateUserDto } from './types';
 
 @Injectable()
 export class UsersService {
@@ -14,5 +15,19 @@ export class UsersService {
 
     async findAll() {
         return await this.usersRepository.findAll();
+    }
+
+    async findOneById(id: number) {
+        return await this.usersRepository.findOne({ id });
+    }
+
+    async findOneByEmail(email: string) {
+        return await this.usersRepository.findOne({ email });
+    }
+
+    async create(data: CreateUserDto) {
+        const user = this.usersRepository.create(data);
+        await this.em.persistAndFlush(user);
+        return user;
     }
 }
