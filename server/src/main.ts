@@ -8,6 +8,7 @@ import session from 'express-session';
 import { COOKIE_NAME, __prod__ } from './common/constants';
 import { redis } from './common/redis';
 import { RedisStore } from 'connect-redis';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 declare module 'express-session' {
     interface SessionData {
@@ -50,6 +51,14 @@ async function bootstrap() {
             saveUninitialized: false,
         }),
     );
+
+    // Swagger
+    const swaggerConfig = new DocumentBuilder()
+        .setTitle('CsTimer API')
+        .setVersion('1.0')
+        .build();
+    const document = SwaggerModule.createDocument(app, swaggerConfig);
+    SwaggerModule.setup('api', app, document);
 
     await app.listen(port);
 }
