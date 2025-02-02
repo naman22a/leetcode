@@ -3,6 +3,7 @@ import {
     IsEnum,
     IsNotEmpty,
     IsNumber,
+    Matches,
     Max,
     Min,
     validateSync,
@@ -29,6 +30,14 @@ export class EnvironmentVariables {
 
     @IsNotEmpty()
     SERVER_URL: string;
+
+    @Matches(
+        /^postgresql:\/\/([^:]+):([^@]+)@([^:\/]+):(\d+)\/([^?]+)\?schema=([^&]+)$/,
+    )
+    DATABASE_URL: string;
+
+    @IsNotEmpty()
+    REDIS_URL: string;
 }
 
 export function validate(config: Record<string, unknown>) {
