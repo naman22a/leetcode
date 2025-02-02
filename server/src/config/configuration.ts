@@ -7,6 +7,7 @@ const configuration = () => ({
     server_url: process.env.SERVER_URL,
     db_url: process.env.DATABASE_URL,
     redis_url: process.env.REDIS_URL,
+    secret: process.env.SESSION_SECRET,
 });
 
 export type Configuration = ConfigType<typeof configuration>;

@@ -38,6 +38,9 @@ export class EnvironmentVariables {
 
     @IsNotEmpty()
     REDIS_URL: string;
+
+    @IsNotEmpty()
+    SESSION_SECRET: string;
 }
 
 export function validate(config: Record<string, unknown>) {
