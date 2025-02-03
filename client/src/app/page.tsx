@@ -1,9 +1,9 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import axios from 'axios';
 import { useToast } from '../hooks/use-toast';
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import * as api from '@/api';
 
 function Home() {
     const router = useRouter();
@@ -12,12 +12,9 @@ function Home() {
     useEffect(() => {
         (async () => {
             try {
-                const res = await axios.get(
-                    `${process.env.NEXT_PUBLIC_API_ENDPOINT}/users/me`,
-                    { withCredentials: true }
-                );
+                const user = await api.users.me();
 
-                if (!res.data) {
+                if (!user) {
                     toast({
                         title: 'Unauthorized',
                         variant: 'destructive'
@@ -37,13 +34,9 @@ function Home() {
 
     const handleLogout = async () => {
         try {
-            const res = await axios.post(
-                `${process.env.NEXT_PUBLIC_API_ENDPOINT}/auth/logout`,
-                {},
-                { withCredentials: true }
-            );
+            const res = await api.auth.logout();
 
-            if (res.data.ok) {
+            if (res.ok) {
                 toast({
                     title: 'Logged out'
                 });
