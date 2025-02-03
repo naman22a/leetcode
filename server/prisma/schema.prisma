@@ -1,0 +1,78 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+    admin
+    user
+}
+
+enum ProblemLevel {
+    easy
+    medium
+    hard
+}
+
+enum Language {
+    cpp
+    java
+    javascript
+    python
+}
+
+enum SubmissionStatus {
+    AC
+    WA
+}
+
+model User {
+    id          Int          @id @default(autoincrement())
+    username    String       @unique
+    email       String       @unique
+    role        UserRole     @default(user)
+    language    Language     @default(cpp)
+    createdAt   DateTime     @default(now())
+    submissions Submission[]
+
+    @@index([username])
+    @@index([email])
+}
+
+model Problem {
+    id          Int               @id @default(autoincrement())
+    title       String
+    description String
+    testCases   Json
+    level       ProblemLevel
+    submissions Submission[]
+    boilerPlate BoilerPlateCode[]
+}
+
+model BoilerPlateCode {
+    problem   Problem  @relation(fields: [problemId], references: [id])
+    problemId Int
+    language  Language
+    code      String
+
+    @@id([problemId, language])
+    @@index([problemId])
+}
+
+model Submission {
+    id          String           @id @unique
+    userId      Int
+    user        User             @relation(fields: [userId], references: [id])
+    problem     Problem          @relation(fields: [problemId], references: [id])
+    problemId   Int
+    code        String
+    language    Language
+    status      SubmissionStatus
+    submittedOn DateTime         @default(now())
+
+    @@index([userId])
+}
