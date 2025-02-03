@@ -1,8 +1,19 @@
-import { Entity, OptionalProps, PrimaryKey, Property } from '@mikro-orm/core';
+import {
+    Entity,
+    Enum,
+    OptionalProps,
+    PrimaryKey,
+    Property,
+} from '@mikro-orm/core';
+
+enum Role {
+    ADMIN = 'ADMIN',
+    USER = 'USER',
+}
 
 @Entity({ tableName: 'users' })
 export class User {
-    [OptionalProps]?: 'createdAt' | 'updatedAt';
+    [OptionalProps]?: 'createdAt' | 'updatedAt' | 'role';
 
     @PrimaryKey()
     id: number;
@@ -18,6 +29,9 @@ export class User {
 
     @Property({ nullable: true })
     bio?: string;
+
+    @Enum({ items: () => Role, default: Role.USER })
+    role: Role;
 
     @Property()
     createdAt = new Date();
