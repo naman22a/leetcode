@@ -8,3 +8,4 @@ const API = axios.create({
 export default API;
 export * as auth from './auth';
 export * as users from './users';
+export * as problems from './problems';
