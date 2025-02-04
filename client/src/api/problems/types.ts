@@ -3,5 +3,5 @@ export interface Problem {
     title: string;
     description: string;
     level: 'easy' | 'medium' | 'hard';
-    testCases: { input: string; output: string }[];
+    testCases: string;
 }

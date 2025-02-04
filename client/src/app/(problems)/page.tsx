@@ -1,10 +1,10 @@
 'use client';
 import { Button } from '@/components/ui/button';
-import { useToast } from '../hooks/use-toast';
+import { useToast } from '@/hooks/use-toast';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import * as api from '@/api';
-import { Problem } from '../api/problems/types';
+import { Problem } from '@/api/problems/types';
 import {
     Table,
     TableBody,
@@ -71,7 +71,7 @@ function Home() {
     };
 
     return (
-        <div className="p-5">
+        <div>
             <h1 className="font-semibold text-3xl mb-5">Leetcode dashboard</h1>
             <Button onClick={() => handleLogout()}>Logout</Button>
 
@@ -81,7 +81,7 @@ function Home() {
                         <TableHead>S.No</TableHead>
                         <TableHead>Title</TableHead>
                         <TableHead>Description</TableHead>
-                        <TableHead>Difficultyi</TableHead>
+                        <TableHead>Difficulty</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
