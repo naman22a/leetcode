@@ -2,8 +2,8 @@ import React from 'react';
 
 const App: React.FC = () => {
     return (
-        <div>
-            <h1>App</h1>
+        <div className="p-5">
+            <h1 className="text-3xl font-bold">Leetcode</h1>
         </div>
     );
 };
