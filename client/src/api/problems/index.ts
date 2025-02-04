@@ -1,5 +1,5 @@
 import API from '..';
-import { Problem } from './types';
+import { Problem, ProblemDetails } from './types';
 
 export const findAll = async (): Promise<Problem[]> => {
     try {
@@ -11,7 +11,7 @@ export const findAll = async (): Promise<Problem[]> => {
     }
 };
 
-export const findOne = async (id: number): Promise<Problem | null> => {
+export const findOne = async (id: number): Promise<ProblemDetails | null> => {
     try {
         const res = await API.get(`/problems/${id}`);
         return res.data;

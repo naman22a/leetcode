@@ -4,6 +4,9 @@ import * as api from '@/api';
 import { useToast } from '@/hooks/use-toast';
 import { useQuery } from '@tanstack/react-query';
 import { twMerge } from 'tailwind-merge';
+import Editor from '@monaco-editor/react';
+import { useState } from 'react';
+import { Button } from '../../../../components/ui/button';
 
 function ProblemPage() {
     const { toast } = useToast();
@@ -24,6 +27,8 @@ function ProblemPage() {
         queryFn: api.users.me
     });
 
+    const [code, setCode] = useState('');
+
     if (isLoading || problemIsLoading) return <p>Loading....</p>;
 
     if (isError || !user) {
@@ -34,6 +39,16 @@ function ProblemPage() {
         console.error(error);
         redirect('/auth');
     }
+
+    const handleRunTestsCases = () => {
+        // TODO: make an api call
+        console.log(code);
+    };
+
+    const handleSubmission = () => {
+        // TODO: make an api call
+        console.log(code);
+    };
 
     return (
         <div className="p-5">
@@ -75,7 +90,29 @@ function ProblemPage() {
                         </div>
                     ))}
                 </div>
-                <div className="w-1/2 h-full"></div>
+                <div className="w-1/2 h-full">
+                    <Editor
+                        height="90vh"
+                        defaultLanguage={problem?.boilerPlate[0].language}
+                        defaultValue={problem?.boilerPlate[0].code}
+                        onChange={(value) => setCode(value!)}
+                        theme="vs-dark"
+                    />
+                    <div className="flex mt-5 gap-5">
+                        <Button
+                            className="bg-gray-800 text-white font-semibold text-lg ml-auto"
+                            onClick={() => handleRunTestsCases()}
+                        >
+                            Run
+                        </Button>
+                        <Button
+                            className="bg-green-500 hover:bg-green-600 text-white font-semibold text-lg"
+                            onClick={() => handleSubmission()}
+                        >
+                            Submit
+                        </Button>
+                    </div>
+                </div>
             </div>
         </div>
     );

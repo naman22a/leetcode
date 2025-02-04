@@ -5,3 +5,11 @@ export interface Problem {
     level: 'easy' | 'medium' | 'hard';
     testCases: string;
 }
+
+export interface ProblemDetails extends Problem {
+    boilerPlate: {
+        code: string;
+        language: string;
+        problemId: number;
+    }[];
+}
