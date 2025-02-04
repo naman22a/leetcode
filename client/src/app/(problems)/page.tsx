@@ -71,9 +71,11 @@ function Home() {
     };
 
     return (
-        <div>
+        <div className="p-5">
             <h1 className="font-semibold text-3xl mb-5">Leetcode dashboard</h1>
-            <Button onClick={() => handleLogout()}>Logout</Button>
+            <Button className="mb-5" onClick={() => handleLogout()}>
+                Logout
+            </Button>
 
             <Table>
                 <TableHeader>
