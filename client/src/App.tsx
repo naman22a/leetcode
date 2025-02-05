@@ -1,10 +1,19 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout/Layout';
+import Home from './pages/Home';
+import Auth from './pages/Auth';
 
 const App: React.FC = () => {
     return (
-        <div className="p-5">
-            <h1 className="text-3xl font-bold">Leetcode</h1>
-        </div>
+        <BrowserRouter>
+            <Layout>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/auth" element={<Auth />} />
+                </Routes>
+            </Layout>
+        </BrowserRouter>
     );
 };
 
