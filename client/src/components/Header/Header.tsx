@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link, redirect } from 'react-router-dom';
 import * as api from '@/api';
 import { Button } from '@/components/ui/button';
+import { ModeToggle } from '../mode-toggle';
 
 const Header: React.FC = () => {
     const client = useQueryClient();
@@ -38,7 +39,7 @@ const Header: React.FC = () => {
                 <img src="/leetcode.svg" alt="Leetcode" className="h-10 w-10" />
                 <h1 className="text-xl font-semibold">Leetcode</h1>
             </Link>
-            <nav>
+            <nav className="flex gap-2 items-center">
                 {meQuery.isLoading || meQuery.isError || !meQuery.data ? (
                     <a
                         href={`${import.meta.env.VITE_API_ENDPOINT}/auth/github`}
@@ -56,7 +57,7 @@ const Header: React.FC = () => {
                         </Button>
                     </div>
                 )}
-                {/* // TODO: toggle theme button */}
+                <ModeToggle />
             </nav>
         </header>
     );
