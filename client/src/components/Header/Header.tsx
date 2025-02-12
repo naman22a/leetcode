@@ -1,12 +1,13 @@
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { Link, redirect } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import * as api from '@/api';
 import { Button } from '@/components/ui/button';
 import { ModeToggle } from '../mode-toggle';
 
 const Header: React.FC = () => {
     const client = useQueryClient();
+    const navigate = useNavigate();
 
     const meQuery = useQuery({
         queryKey: ['users', 'me'],
@@ -23,7 +24,7 @@ const Header: React.FC = () => {
             const res = await logoutMutation.mutateAsync();
             if (res.ok && !res.errors) {
                 client.invalidateQueries({ queryKey: ['users', 'me'] });
-                redirect('/auth');
+                navigate('/auth');
                 return;
             }
             alert('Something went wrong');
