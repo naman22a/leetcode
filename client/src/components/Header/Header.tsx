@@ -40,9 +40,11 @@ const Header: React.FC = () => {
             </Link>
             <nav>
                 {meQuery.isLoading || meQuery.isError || !meQuery.data ? (
-                    <Link to="/auth">
+                    <a
+                        href={`${import.meta.env.VITE_API_ENDPOINT}/auth/github`}
+                    >
                         <Button>Sign in</Button>
-                    </Link>
+                    </a>
                 ) : (
                     <div className="flex items-center gap-2">
                         <h1>{meQuery.data.username}</h1>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as api from '../api';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
@@ -10,10 +10,11 @@ const Home: React.FC = () => {
         queryFn: api.users.me
     });
 
-    if (meQuery.isError || !meQuery.data) {
-        navigate('/auth');
-        return null;
-    }
+    useEffect(() => {
+        if (!meQuery.isLoading && (meQuery.isError || !meQuery.data)) {
+            navigate('/auth');
+        }
+    }, [meQuery.isError, meQuery.data, meQuery.isLoading, navigate]);
 
     if (meQuery.isLoading) return <p>Loading...</p>;
 
