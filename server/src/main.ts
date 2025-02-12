@@ -54,7 +54,7 @@ async function bootstrap() {
 
     // Swagger
     const swaggerConfig = new DocumentBuilder()
-        .setTitle('CsTimer API')
+        .setTitle('Leetcode API')
         .setVersion('1.0')
         .build();
     const document = SwaggerModule.createDocument(app, swaggerConfig);

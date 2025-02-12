@@ -1,5 +1,8 @@
 import React from 'react';
 import Header from '../Header/Header';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 interface Props {
     children: React.ReactNode;
@@ -8,8 +11,10 @@ interface Props {
 const Layout: React.FC<Props> = ({ children }) => {
     return (
         <div>
-            <Header />
-            {children}
+            <QueryClientProvider client={queryClient}>
+                <Header />
+                {children}
+            </QueryClientProvider>
         </div>
     );
 };

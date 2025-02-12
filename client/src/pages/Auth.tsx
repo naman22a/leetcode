@@ -1,11 +1,12 @@
 import React from 'react';
 
-interface Props {}
-
-const Auth: React.FC<Props> = () => {
+const Auth: React.FC = () => {
     return (
         <div className="p-5">
             <h1>Auth</h1>
+            <a href={`${import.meta.env.VITE_API_ENDPOINT}/auth/github`}>
+                Login with github
+            </a>
         </div>
     );
 };
