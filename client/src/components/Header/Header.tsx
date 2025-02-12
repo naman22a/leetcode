@@ -1,7 +1,8 @@
 import React from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { Link, redirect } from 'react-router-dom';
-import * as api from '../../api';
+import * as api from '@/api';
+import { Button } from '@/components/ui/button';
 
 const Header: React.FC = () => {
     const client = useQueryClient();
@@ -39,16 +40,18 @@ const Header: React.FC = () => {
             </Link>
             <nav>
                 {meQuery.isLoading || meQuery.isError || !meQuery.data ? (
-                    <Link to="/auth">Sign in</Link>
+                    <Link to="/auth">
+                        <Button>Sign in</Button>
+                    </Link>
                 ) : (
                     <div className="flex items-center gap-2">
                         <h1>{meQuery.data.username}</h1>
-                        <button
+                        <Button
                             className="cursor-pointer"
                             onClick={() => handleLogout()}
                         >
                             Logout
-                        </button>
+                        </Button>
                     </div>
                 )}
                 {/* // TODO: toggle theme button */}
