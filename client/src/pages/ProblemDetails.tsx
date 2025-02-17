@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as api from '@/api';
 import { twMerge } from 'tailwind-merge';
@@ -24,6 +24,7 @@ const ProblemDetails: React.FC = () => {
         if (!isLoading && (isError || !problem)) {
             navigate('/auth');
         }
+        setCode(problem?.boilerPlate[0].code!);
     }, [isError, problem, isLoading, navigate]);
 
     if (isLoading) return <p>Loading...</p>;
@@ -77,7 +78,7 @@ const ProblemDetails: React.FC = () => {
             </div>
             <div className="w-1/2 h-full">
                 <Editor
-                    height="90vh"
+                    height="75vh"
                     defaultLanguage={problem?.boilerPlate[0].language}
                     defaultValue={problem?.boilerPlate[0].code}
                     onChange={(value) => setCode(value!)}
