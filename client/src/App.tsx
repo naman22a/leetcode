@@ -6,6 +6,7 @@ import ProblemDetails from './pages/ProblemDetails';
 import Header from './components/Header/Header';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from './components/theme-provider';
+import { Toaster } from 'react-hot-toast';
 
 const queryClient = new QueryClient();
 
@@ -24,6 +25,7 @@ const App: React.FC = () => {
                         />
                     </Routes>
                 </BrowserRouter>
+                <Toaster />
             </ThemeProvider>
         </QueryClientProvider>
     );

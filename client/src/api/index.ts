@@ -9,3 +9,4 @@ export default API;
 export * as auth from './auth';
 export * as users from './users';
 export * as problems from './problems';
+export * as submissions from './submissions';

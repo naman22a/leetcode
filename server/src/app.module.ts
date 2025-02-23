@@ -6,7 +6,7 @@ import { AuthModule } from './auth/auth.module';
 
 // Modules
 import { UsersModule } from './shared';
-import { ProblemsModule } from './modules';
+import { ProblemsModule, SubmissionsModule } from './modules';
 
 @Module({
     imports: [
@@ -23,6 +23,7 @@ import { ProblemsModule } from './modules';
         // Modules
         UsersModule,
         ProblemsModule,
+        SubmissionsModule,
     ],
     controllers: [],
     providers: [],
