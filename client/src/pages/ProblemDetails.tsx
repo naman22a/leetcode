@@ -127,7 +127,10 @@ const ProblemDetails: React.FC = () => {
                         value="submissions"
                         className="h-screen overflow-y-scroll"
                     >
-                        <Submissions id={problem!.id} />
+                        <Submissions
+                            id={problem!.id}
+                            {...{ setCode, setLanguage }}
+                        />
                     </TabsContent>
                 </Tabs>
             </div>
@@ -157,7 +160,7 @@ const ProblemDetails: React.FC = () => {
                 <Editor
                     height="75vh"
                     defaultLanguage={problem?.boilerPlate[0].language}
-                    defaultValue={problem?.boilerPlate[0].code}
+                    value={code}
                     onChange={(value) => setCode(value!)}
                     theme="vs-dark"
                 />

@@ -17,9 +17,11 @@ dayjs.extend(relativeTime);
 
 interface Props {
     id: number;
+    setCode: React.Dispatch<React.SetStateAction<string>>;
+    setLanguage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const Submissions: React.FC<Props> = ({ id }) => {
+const Submissions: React.FC<Props> = ({ id, setCode, setLanguage }) => {
     const submissionsQuery = useQuery({
         queryKey: ['submissions'],
         queryFn: () => api.submissions.findAll(id),
@@ -44,7 +46,12 @@ const Submissions: React.FC<Props> = ({ id }) => {
             </TableHeader>
             <TableBody>
                 {submissionsQuery.data?.map((submission) => (
-                    <TableRow>
+                    <TableRow
+                        onClick={() => {
+                            setCode(submission.code);
+                            setLanguage(submission.language);
+                        }}
+                    >
                         <TableCell
                             className={cn(
                                 submission.status === 'WA'

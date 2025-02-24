@@ -25,7 +25,7 @@ const App: React.FC = () => {
                         />
                     </Routes>
                 </BrowserRouter>
-                <Toaster />
+                <Toaster reverseOrder />
             </ThemeProvider>
         </QueryClientProvider>
     );
