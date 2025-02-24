@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import * as api from '@/api';
-import { twMerge } from 'tailwind-merge';
+import { cn } from '../lib/utils';
 import { Button } from '../components/ui/button';
 import Editor from '@monaco-editor/react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -81,7 +81,7 @@ const ProblemDetails: React.FC = () => {
                     <TabsContent value="description">
                         <h1 className="text-3xl font-bold">{problem?.title}</h1>
                         <div
-                            className={twMerge(
+                            className={cn(
                                 'inline-block py-2 px-6 rounded-full my-5',
                                 problem?.level === 'hard' &&
                                     'bg-red-500 text-white',

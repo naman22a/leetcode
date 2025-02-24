@@ -10,7 +10,7 @@ import {
     TableHeader,
     TableRow
 } from '@/components/ui/table';
-import { twMerge } from 'tailwind-merge';
+import { cn } from '../lib/utils';
 
 const Home: React.FC = () => {
     const navigate = useNavigate();
@@ -60,7 +60,7 @@ const Home: React.FC = () => {
                                 {problem.description.slice(0, 100)}...
                             </TableCell>
                             <TableCell
-                                className={twMerge(
+                                className={cn(
                                     'font-semibold',
                                     problem.level === 'easy' &&
                                         'text-green-500',
