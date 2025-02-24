@@ -171,7 +171,7 @@ const ProblemDetails: React.FC = () => {
                     </Button>
                 </div>
                 {errors.length > 0 && (
-                    <div className="text-red-500">
+                    <div className="text-red-500 my-2">
                         {errors.map((error) => (
                             <p>{error}</p>
                         ))}
