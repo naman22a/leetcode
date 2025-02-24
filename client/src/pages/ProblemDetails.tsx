@@ -141,17 +141,35 @@ const ProblemDetails: React.FC = () => {
                         <Button variant="outline">{language}</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                        <DropdownMenuItem onClick={() => setLanguage('cpp')}>
+                        <DropdownMenuItem
+                            onClick={() => {
+                                setCode('');
+                                setLanguage('cpp');
+                            }}
+                        >
                             cpp
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setLanguage('java')}>
+                        <DropdownMenuItem
+                            onClick={() => {
+                                setCode('');
+                                setLanguage('java');
+                            }}
+                        >
                             java
                         </DropdownMenuItem>
-                        <DropdownMenuItem onClick={() => setLanguage('python')}>
+                        <DropdownMenuItem
+                            onClick={() => {
+                                setCode('');
+                                setLanguage('python');
+                            }}
+                        >
                             python
                         </DropdownMenuItem>
                         <DropdownMenuItem
-                            onClick={() => setLanguage('javascript')}
+                            onClick={() => {
+                                setCode('');
+                                setLanguage('javascript');
+                            }}
                         >
                             javascript
                         </DropdownMenuItem>
@@ -159,7 +177,7 @@ const ProblemDetails: React.FC = () => {
                 </DropdownMenu>
                 <Editor
                     height="75vh"
-                    defaultLanguage={problem?.boilerPlate[0].language}
+                    language={language}
                     value={code}
                     onChange={(value) => setCode(value!)}
                     theme="vs-dark"
