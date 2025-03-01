@@ -2,6 +2,8 @@
 
 > Coding practice platform
 
+![Leetcode](./assets/leetcode.png)
+
 ## ⚙️ Tech Stack
 
 1. 🌐 Frontend
