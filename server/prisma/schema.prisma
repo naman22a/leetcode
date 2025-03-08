@@ -34,6 +34,7 @@ model User {
     id          Int          @id @default(autoincrement())
     username    String       @unique
     email       String       @unique
+    bio         String?
     role        UserRole     @default(user)
     language    Language     @default(cpp)
     createdAt   DateTime     @default(now())

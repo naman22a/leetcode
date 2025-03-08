@@ -9,3 +9,14 @@ export const me = async (): Promise<User> => {
         return null;
     }
 };
+
+export const byUsername = async (
+    username: string
+): Promise<(User & { submissions: { submittedOn: string }[] }) | null> => {
+    try {
+        const res = await API.get(`/users/${username}`);
+        return res.data;
+    } catch (error) {
+        return null;
+    }
+};

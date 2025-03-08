@@ -1,12 +1,13 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Auth from './pages/Auth';
-import ProblemDetails from './pages/ProblemDetails';
-import Header from './components/Header/Header';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from './components/theme-provider';
 import { Toaster } from 'react-hot-toast';
+import Header from './components/Header/Header';
+import Home from './pages/Home';
+import Auth from './pages/Auth';
+import ProblemDetails from './pages/ProblemDetails';
+import Profile from './pages/Profile';
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App: React.FC = () => {
                             path="/problems/:id"
                             element={<ProblemDetails />}
                         />
+                        <Route path="/u/:username" element={<Profile />} />
                     </Routes>
                 </BrowserRouter>
                 <Toaster reverseOrder />
