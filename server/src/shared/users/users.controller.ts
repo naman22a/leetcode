@@ -1,4 +1,4 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Req, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { AuthGuard } from '../../auth/auth.guard';
 import { Request } from 'express';
@@ -18,5 +18,10 @@ export class UsersController {
     async findMe(@Req() req: Request): Promise<User | null> {
         const userId = req.session.userId!;
         return await this.usersService.findOneById(userId);
+    }
+
+    @Get(':username')
+    async getUser(@Param('username') username: string): Promise<User | null> {
+        return await this.usersService.findOneByUsername(username);
     }
 }

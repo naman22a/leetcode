@@ -49,7 +49,9 @@ const Header: React.FC = () => {
                     </a>
                 ) : (
                     <div className="flex items-center gap-2">
-                        <h1>{meQuery.data.username}</h1>
+                        <Link to={`/u/${meQuery.data.username}`}>
+                            <h1>{meQuery.data.username}</h1>
+                        </Link>
                         <Button
                             className="cursor-pointer"
                             onClick={() => handleLogout()}
