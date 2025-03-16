@@ -15,6 +15,25 @@ import {
     DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 
+const languages = [
+    'cpp',
+    'python',
+    'javascript',
+    'java',
+    'go',
+    'rust',
+    'csharp',
+    'ruby',
+    'swift',
+    'php',
+    'kotlin',
+    'dart',
+    'R',
+    'perl',
+    'typescript',
+    'haskell'
+];
+
 const ProblemDetails: React.FC = () => {
     const { id } = useParams();
     const navigate = useNavigate();
@@ -141,38 +160,17 @@ const ProblemDetails: React.FC = () => {
                         <Button variant="outline">{language}</Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent>
-                        <DropdownMenuItem
-                            onClick={() => {
-                                setCode('');
-                                setLanguage('cpp');
-                            }}
-                        >
-                            cpp
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                            onClick={() => {
-                                setCode('');
-                                setLanguage('java');
-                            }}
-                        >
-                            java
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                            onClick={() => {
-                                setCode('');
-                                setLanguage('python');
-                            }}
-                        >
-                            python
-                        </DropdownMenuItem>
-                        <DropdownMenuItem
-                            onClick={() => {
-                                setCode('');
-                                setLanguage('javascript');
-                            }}
-                        >
-                            javascript
-                        </DropdownMenuItem>
+                        {languages.map((lang) => (
+                            <DropdownMenuItem
+                                key={lang}
+                                onClick={() => {
+                                    setCode('');
+                                    setLanguage(lang);
+                                }}
+                            >
+                                {lang}
+                            </DropdownMenuItem>
+                        ))}
                     </DropdownMenuContent>
                 </DropdownMenu>
                 <Editor
@@ -193,8 +191,8 @@ const ProblemDetails: React.FC = () => {
                 </div>
                 {errors.length > 0 && (
                     <div className="text-red-500 my-2">
-                        {errors.map((error) => (
-                            <p>{error}</p>
+                        {errors.map((error, index) => (
+                            <p key={index}>{error}</p>
                         ))}
                     </div>
                 )}

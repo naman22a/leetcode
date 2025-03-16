@@ -23,6 +23,18 @@ enum Language {
     java
     javascript
     python
+    go
+    rust
+    csharp
+    ruby
+    swift
+    php
+    kotlin
+    dart
+    R
+    perl
+    typescript
+    haskell
 }
 
 enum SubmissionStatus {
