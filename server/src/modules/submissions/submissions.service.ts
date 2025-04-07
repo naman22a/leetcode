@@ -225,7 +225,7 @@ export class SubmissionsService {
 
             if (compileCommand) {
                 executeProcess(compileCommand, (compileResult) => {
-                    if (!compileResult.success) {
+                    if (!compileResult.success && compileResult.output) {
                         resolve({
                             success: false,
                             output:
