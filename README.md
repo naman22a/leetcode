@@ -2,6 +2,8 @@
 
 > Coding practice platform
 
+LeetCode Clone is a web app for solving coding problems with real-time code execution. It uses React, TypeScript, and Monaco Editor on the frontend, and NestJS, Prisma, and PostgreSQL on the backend. Code runs securely in isolated Docker containers.
+
 ## 🌐 Live Demo
 
 [https://leetcode.namanarora.xyz](https://leetcode.namanarora.xyz)
