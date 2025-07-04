@@ -13,3 +13,12 @@ export interface ProblemDetails extends Problem {
         problemId: number;
     }[];
 }
+
+export type PaginatedProblems = {
+    data: Problem[];
+    meta: {
+        totalCount: number;
+        totalPages: number;
+        currentPage: number;
+    };
+};

@@ -5,8 +5,25 @@ import { PrismaService } from '../../prisma/prisma.service';
 export class ProblemsService {
     constructor(private prisma: PrismaService) {}
 
-    async findAll() {
-        return await this.prisma.problem.findMany();
+    async findAll(page: number, limit: number) {
+        const skip = (page - 1) * limit;
+
+        const [problems, totalCount] = await Promise.all([
+            this.prisma.problem.findMany({
+                skip,
+                take: limit,
+            }),
+            this.prisma.problem.count(),
+        ]);
+
+        return {
+            data: problems,
+            meta: {
+                totalCount,
+                totalPages: Math.ceil(totalCount / limit),
+                currentPage: page,
+            },
+        };
     }
 
     async findOneById(id: number) {
