@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as api from '../api';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
@@ -10,17 +10,23 @@ import {
     TableHeader,
     TableRow
 } from '@/components/ui/table';
+import { Button } from '@/components/ui/button';
 import { cn } from '../lib/utils';
 
 const Home: React.FC = () => {
+    const [page, setPage] = useState(1);
+    const limit = 10;
+
     const navigate = useNavigate();
+
     const meQuery = useQuery({
         queryKey: ['users', 'me'],
         queryFn: api.users.me
     });
+
     const problemsQuery = useQuery({
-        queryKey: ['problems'],
-        queryFn: api.problems.findAll
+        queryKey: ['problems', page],
+        queryFn: () => api.problems.findAll(page, limit)
     });
 
     useEffect(() => {
@@ -29,7 +35,10 @@ const Home: React.FC = () => {
         }
     }, [meQuery.isError, meQuery.data, meQuery.isLoading, navigate]);
 
-    if (meQuery.isLoading) return <p>Loading...</p>;
+    if (meQuery.isLoading || problemsQuery.isLoading) return <p>Loading...</p>;
+
+    const problems = problemsQuery.data?.data ?? [];
+    const meta = problemsQuery.data?.meta;
 
     return (
         <div className="p-5">
@@ -45,14 +54,16 @@ const Home: React.FC = () => {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {problemsQuery.data?.map((problem, index) => (
+                    {problems.map((problem, index) => (
                         <TableRow key={problem.id}>
-                            <TableCell>{index + 1}</TableCell>
+                            <TableCell>
+                                {(page - 1) * limit + index + 1}
+                            </TableCell>
                             <TableCell
                                 className="hover:text-amber-400 cursor-pointer font-bold"
-                                onClick={() => {
-                                    navigate(`/problems/${problem.id}`);
-                                }}
+                                onClick={() =>
+                                    navigate(`/problems/${problem.id}`)
+                                }
                             >
                                 {problem.title}
                             </TableCell>
@@ -75,6 +86,25 @@ const Home: React.FC = () => {
                     ))}
                 </TableBody>
             </Table>
+
+            {/* Pagination Controls */}
+            <div className="flex justify-between mt-6">
+                <Button
+                    onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                    disabled={page === 1}
+                >
+                    Previous
+                </Button>
+                <p className="text-sm text-muted-foreground">
+                    Page {page} of {meta?.totalPages ?? '?'}
+                </p>
+                <Button
+                    onClick={() => setPage((prev) => prev + 1)}
+                    disabled={meta && page >= meta.totalPages}
+                >
+                    Next
+                </Button>
+            </div>
         </div>
     );
 };
