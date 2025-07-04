@@ -86,8 +86,8 @@ const ProblemDetails: React.FC = () => {
     };
 
     return (
-        <div className="flex w-full h-screen p-5">
-            <div className="w-1/2 h-full">
+        <div className="flex flex-col md:flex-row w-full h-screen p-5">
+            <div className="md:w-1/2 h-full">
                 <Tabs defaultValue={tabValue}>
                     <TabsList>
                         <TabsTrigger value="description">
@@ -153,7 +153,7 @@ const ProblemDetails: React.FC = () => {
                     </TabsContent>
                 </Tabs>
             </div>
-            <div className="w-1/2 h-full">
+            <div className="md:w-1/2 h-full">
                 Language:{' '}
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
